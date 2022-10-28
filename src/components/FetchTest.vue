@@ -1,26 +1,40 @@
 <template>
     <div>
         <h3>Fetch Test</h3>
-        <p>{{payload.value}}</p>
+        <div v-if="isLoaded">
+            <p>Name: {{payload.name}}</p>
+            <p>Question Count: {{payload.questions.length}}</p>
+            <ul>
+                <li v-for="question in payload.questions" :key="question.questionId">
+                    <p>{{question.text}}</p>
+                    <ul>
+                        <li v-for="answer in question.answers" :key="answer.answerId">{{answer.text}}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const payload = ref({});
+const payload = ref(null);
+const isLoaded = ref(false);
 
-function getQuestionList(url){
-   fetch(url, {
+async function getQuestionList(url){
+   let response = await fetch(url, {
         method: 'GET',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
              'Content-Type': 'application/json; charset=utf-8'
           }
-    })
-    .then((response) => response.json())
+    });
+
+    await response.json()
     .then((data) => {
-         console.log(data);
+         payload.value = data;
+         isLoaded.value = true;
     })
     .catch((ex) => {
         console.log(ex);
