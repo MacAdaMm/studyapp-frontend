@@ -1,6 +1,7 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import TestView from '@/views/TestView.vue'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import GameView from '@/views/GameView.vue';
+import AnimeJSSandbox from '@/views/AnimeJSSandbox.vue';
 
 const routes = [
   {
@@ -17,9 +18,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: "/test",
-    name: "test",
-    component: TestView
+    path: "/game",
+    name: "Study App",
+    component: GameView
+  },
+  {
+    path: '/sandbox',
+    name: 'SandBox',
+    component: AnimeJSSandbox
   }
 ]
 
