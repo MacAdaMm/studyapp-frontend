@@ -1,11 +1,13 @@
 <template>
     <div class="square"></div>
     <button @click="play">Play</button>
+    <LoginComponent/>
 </template>
 
 <script setup>
 import anime from 'animejs';
 import { onUnmounted } from 'vue';
+import LoginComponent from '@/components/LoginComponent.vue';
 
 let animation = null;
 
